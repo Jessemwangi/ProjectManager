@@ -1,30 +1,30 @@
+.input {
 
-.input{
-  
-display: flex;
-width: 90%;
-position: relative;
-align-items: center;
+    display: flex;
+    width: 90%;
+    position: relative;
+    align-items: center;
 
 }
-.input_box{
-width: 100%;
-border-radius: 30px;
-transition: 0.2s;
-border: none;
-padding: 20px 30px;
-font-size: 25px;
-box-shadow: inset 0 0 5px black;
+
+.input_box {
+    width: 100%;
+    border-radius: 30px;
+    transition: 0.2s;
+    border: none;
+    padding: 20px 30px;
+    font-size: 25px;
+    box-shadow: inset 0 0 5px black;
 }
 
-.input_box:focus{
+.input_box:focus {
     box-shadow: 0 0 10px 1000px #00000076;
     outline: none;
 }
 
 
 
-.input_submit{
+.input_submit {
     position: absolute;
     width: 50px;
     height: 50px;
@@ -42,59 +42,106 @@ box-shadow: inset 0 0 5px black;
     justify-content: center;
 }
 
-.input_submit:hover{
+.input_submit:hover {
     background-color: #093752;
 }
-.input_submit:active{
+
+.input_submit:active {
     transform: scale(0.8);
     box-shadow: 0 0 5px black;
-   
+
 }
-.todos{
+
+
+
+.todos_single_form {
     display: flex;
-    justify-content: space-evenly;
-    width: 90%;
-    flex-wrap: wrap;
-}
-.todos_single_form{
-    display: flex;
-    width: 29.5%;
     border-radius: 5px;
     padding: 20px;
     margin-top: 15px;
     background-color: blanchedalmond;
+    transition: 0.2s;
 }
 
-.todos_single_text{
+.todos_single_form:hover{
+    box-shadow: 0 0 5px black;
+    transform: scale(1.03);
+}
+
+.todos_single_text {
     flex: 1;
     padding: 5px;
     border: none;
     font-size: 20px;
 }
-.todos_single_text:focus{
+
+.todos_single_text:focus {
     outline: none;
 }
-.icon{
-    margin-left:10px;
+
+.icon {
+    margin-left: 10px;
     font-size: 25px;
     cursor: pointer;
 
 }
 
-@media  (max-width:1200px) {
-    .todos_single_form{
-        width: 40%;
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 10px;
+}
+
+.todos_block{
+
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    width: 30%;
+    border-radius: 10px;
+    background-color: rgb(162, 212, 212);
+}
+
+.todos_active {
+
+}
+
+.todos_block {
+
+}
+
+
+.todos_heading {
+font-size: 30px;
+}
+
+
+
+
+
+@media (max-width:1100px) {
+    .todos_block {
+        width: 30%;
     }
 }
 
-@media  (max-width:700px) {
-    .input{
+@media (max-width:700px) {
+    .input {
         width: 95%;
     }
-    .todos{
+
+    .todos {
         width: 95%;
     }
-    .todos_single_form{
+
+    .todos_single_form {
         width: 100%;
+    }
+    .container{
+        width: 95%;
+        flex-direction: column;
     }
 }
