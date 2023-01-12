@@ -1,10 +1,45 @@
-import React from 'react';
+import React, { FormEvent, useState } from 'react';
+
+// interface props {
+//     firstNo:number,
+//     secNo:number,
+//     result:number,
+// }
 
 const Calculator = () => {
+    const [result,setResult] =useState<number>(0)
+    const[firstNo,setFirstNo] = useState<number>(0)
+    const[secNo,setSecNo] = useState<number>(0)
+
+
+    const handleSubmit = (e:FormEvent) =>{
+        e.preventDefault();
+        setResult(firstNo + secNo)
+        console.log(result)
+    }
     return (
-        <div>
-            
-        </div>
+        <form 
+        onSubmit={(e) => handleSubmit(e)}>
+            <div>
+                <input type="number" placeholder='enter a number' 
+                className="calc_input" name='firstNo' onChange={(e) =>{
+                    e.preventDefault()
+                    setFirstNo(parseInt(e.target.value))
+                }} />
+
+                <input type="number" placeholder='enter sec number' 
+                className="calc_input" name='secNo' 
+                onChange={(e) =>{
+                    e.preventDefault()
+                    let secondNo = parseInt(e.target.value)
+                    setSecNo(secondNo)
+                    
+                }}/>
+
+                <input type="submit" value="send data" />
+                <p>the result is {result}</p>
+            </div>
+        </form>
     );
 };
 
