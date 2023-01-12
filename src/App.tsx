@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import InputFiel from './Component/InputFiel';
+import { Todo } from './Component/model';
+import TodoList from './Component/TodoList';
 
-function App() {
+
+const App:React.FC = ()=> {
+const  [todo,setTodo] = useState<string>("");
+// const  [todo,setTodo] = useState<string | number>("");
+const [todos,setTodos]=useState<Todo[]>([])
+console.log(todo);
+
+
+const handleAdd = (e:React.FormEvent) =>{
+e.preventDefault();
+if (todo){
+  setTodos([...todos,{id:Date.now(),todo:todo,isDone:false}])
+  setTodo('');
+}
+}
+
+console.log(todos);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <span className='heading'>Task Manager</span>
+      <InputFiel todo={todo} setTodo={setTodo} handleAdd={handleAdd}/>
+      <TodoList todoList={todos} setTodos = {setTodos}/>
+      {/* {todos.map(todo_ =>
+      <li>{todo_.todo}</li>)} */}
     </div>
   );
 }
