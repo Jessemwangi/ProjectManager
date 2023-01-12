@@ -3,6 +3,7 @@ import './App.css';
 import InputFiel from './Component/InputFiel';
 import { Todo } from './Component/model';
 import TodoList from './Component/TodoList';
+import Calculator from './Component/Calculator';
 
 
 const App:React.FC = ()=> {
@@ -26,8 +27,7 @@ console.log(todos);
       <span className='heading'>Task Manager</span>
       <InputFiel todo={todo} setTodo={setTodo} handleAdd={handleAdd}/>
       <TodoList todoList={todos} setTodos = {setTodos}/>
-      {/* {todos.map(todo_ =>
-      <li>{todo_.todo}</li>)} */}
+      <Calculator/>
     </div>
   );
 }
