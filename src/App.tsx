@@ -27,7 +27,7 @@ console.log(todos);
       <span className='heading'>Task Manager</span>
       <InputFiel todo={todo} setTodo={setTodo} handleAdd={handleAdd}/>
       <TodoList todoList={todos} setTodos = {setTodos}/>
-      <Calculator/>
+      {/* <Calculator/> */}
     </div>
   );
 }

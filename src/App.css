@@ -13,4 +13,7 @@
  .heading{
   z-index: 1;
   text-align: center;
+  padding: 1rem;
+  font-size: 32px;
+  font-weight: 900;
  }
