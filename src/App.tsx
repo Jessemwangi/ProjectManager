@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import InputFiel from './Component/InputFiel';
 import { Todo } from './Component/model';
@@ -23,6 +23,11 @@ if (todo){
   setTodo('');
 }
 }
+  
+  useEffect(() => {
+    setComplitedTodos(todos.filter(todo => todo.isDone === true && todo.isStarted === false))
+    setOnGoingTodos(todos.filter(todo => todo.isStarted===true))
+  },[todos])
 
 console.log(todos);
   return (

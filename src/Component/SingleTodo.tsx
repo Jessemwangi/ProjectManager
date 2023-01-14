@@ -1,7 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {  useEffect, useRef, useState } from "react";
 import { Todo } from "./model";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
-import { MdDone } from "react-icons/md";
+import { MdAddTask, MdDone } from "react-icons/md";
+import { FaTasks } from "react-icons/fa";
+
 type props = {
   todo: Todo;
   todos: Todo[];
@@ -17,7 +19,7 @@ const SingleTodo = ({ index, todo, todos, setTodos }: props) => {
   const handleDone = (id: number) => {
     setTodos(
       todos.map((todo) =>
-        todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
+        todo.id === id ? { ...todo, isDone: !todo.isDone, isStarted: false} : todo
       )
     );
   };
@@ -25,6 +27,14 @@ const SingleTodo = ({ index, todo, todos, setTodos }: props) => {
   const handleDelete = (id: number) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
+  
+  const handleOngoing = (id:number ) => {
+    setTodos(
+      todos.map((todo) => (todo.id === id ? { ...todo, isStarted: !todo.isStarted } : todo))
+    );
+
+
+}
 
   const handleEdit = (e: React.FormEvent, id: number) => {
     e.preventDefault();
@@ -69,12 +79,26 @@ const SingleTodo = ({ index, todo, todos, setTodos }: props) => {
           }}
         >
           <AiFillEdit />
+
         </span>
+
+        <span
+          className="icon"
+          onClick={() => {handleOngoing(todo.id)}}
+        >
+          {todo.isStarted ? (
+          <FaTasks/>
+            ) : (
+                 <MdAddTask/>      
+          )}
+          
+        </span>
+
         <span className="icon" onClick={() => handleDelete(todo.id)}>
           <AiFillDelete />
         </span>
         <span className="icon" onClick={() => handleDone(todo.id)}>
-          <MdDone />
+        <MdDone /> 
         </span>
       </div>
     </form>
