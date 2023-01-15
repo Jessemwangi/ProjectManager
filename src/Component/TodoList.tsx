@@ -5,6 +5,8 @@ import SingleTodo from "./SingleTodo";
 import { Droppable } from "react-beautiful-dnd";
 
 interface props {
+    backLog: Todo[];
+    setBacklog:React.Dispatch<React.SetStateAction<Todo[]>>;
   todoList: Todo[];
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
   onGoingTodos: Todo[];
@@ -12,17 +14,23 @@ interface props {
   complitedTodos: Todo[];
   setComplitedTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
+
 const TodoList: React.FC<props> = ({
   todoList,
   setTodos,
   complitedTodos,
   onGoingTodos,
-  setOnGoingTodos,
+    setOnGoingTodos,
+    setComplitedTodos,
+    setBacklog,backLog,
 }) => {
+
+
+    
   console.log(todoList);
   return (
     <div className="container">
-      <Droppable droppableId="todolist">
+      <Droppable droppableId="todosbacklog">
         {(provided) => (
           <div
             className="todos_active todos_block"
@@ -30,7 +38,8 @@ const TodoList: React.FC<props> = ({
             {...provided.droppableProps}
           >
             <span className="todos_headings">Todo Backlog</span>
-            {todoList.map((todo_, index) => (
+                      {
+                         backLog.map((todo_, index) => (
               <SingleTodo
                 index={index}
                 todo={todo_}
@@ -38,11 +47,13 @@ const TodoList: React.FC<props> = ({
                 todos={todoList}
                 setTodos={setTodos}
               />
-            ))}
+                         )
+                         )}
+                      {provided.placeholder}
           </div>
         )}
       </Droppable>
-      <Droppable droppableId="TodoOngoing">
+      <Droppable droppableId="todosOngoing">
         {(provided) => (
           <div
             className="todos_ongoing todos_block"
@@ -59,11 +70,12 @@ const TodoList: React.FC<props> = ({
                 setTodos={setTodos}
               />
             ))}
+                        {provided.placeholder}
           </div>
         )}
       </Droppable>
 
-      <Droppable droppableId="TodoRemove">
+      <Droppable droppableId="todo_Remove">
         {(provided) => (
           <div
             className="todos_complete todos_block"
@@ -80,6 +92,7 @@ const TodoList: React.FC<props> = ({
                 setTodos={setTodos}
               />
             ))}
+                        {provided.placeholder}
           </div>
         )}
       </Droppable>

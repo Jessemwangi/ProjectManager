@@ -34,7 +34,7 @@ const SingleTodo = ({ index, todo, todos, setTodos }: props) => {
   const handleOngoing = (id: number) => {
     setTodos(
       todos.map((todo) =>
-        todo.id === id ? { ...todo, isStarted: !todo.isStarted } : todo
+        todo.id === id ? { ...todo, isStarted: !todo.isStarted,isDone:false } : todo
       )
     );
   };
@@ -42,8 +42,11 @@ const SingleTodo = ({ index, todo, todos, setTodos }: props) => {
   const handleEdit = (e: React.FormEvent, id: number) => {
     e.preventDefault();
     setTodos(
+    
       todos.map((todo) => (todo.id === id ? { ...todo, todo: editTodo } : todo))
-    );
+  )
+    
+    console.log(todos)
     setEdit(false);
   };
 
@@ -53,7 +56,8 @@ const SingleTodo = ({ index, todo, todos, setTodos }: props) => {
 
   return (
     <Draggable draggableId={todo.id.toString()} index={index}>
-      {(provided) => (
+      {
+        (provided) => (
     <form
       className="todos_single_form"
           onSubmit={(e) => handleEdit(e, todo.id)}
