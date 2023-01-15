@@ -22,8 +22,6 @@
     outline: none;
 }
 
-
-
 .input_submit {
     position: absolute;
     width: 50px;
@@ -56,8 +54,9 @@
 
 .todos_single_form {
     display: flex;
+    flex-direction: column;
     border-radius: 5px;
-    padding: 20px;
+    padding: 5px 20px 20px 20px;
     margin-top: 15px;
     background-color: blanchedalmond;
     transition: 0.2s;
@@ -67,6 +66,13 @@
 .todos_single_form:hover{
     box-shadow: 0 0 5px black;
     transform: scale(1.03);
+}
+.todo_content{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .todos_single_text {

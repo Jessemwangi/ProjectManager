@@ -2,5 +2,6 @@ export interface Todo{
     id:number,
     todo: string,
     isStarted:boolean,
-    isDone:boolean
+    isDone: boolean,
+    createdAt:string,
 }

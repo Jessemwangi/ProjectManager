@@ -20,7 +20,7 @@ console.log(todo);
 const handleAdd = (e:React.FormEvent) =>{
 e.preventDefault();
 if (todo){
-  setTodos([...todos,{id:Date.now(),todo:todo,isDone:false,isStarted:false}])
+  setTodos([...todos, { id: Date.now(), todo: todo, isDone: false, isStarted: false, createdAt: `${new Date().toLocaleDateString()}` }])
   setTodo('');
 }
 }
@@ -68,6 +68,7 @@ if (todo){
       
     }
     if (destination.droppableId === "todosRemove") {
+     
       complete.splice(destination.index, 0,{...add,isDone:true, isStarted:false})
       
     }

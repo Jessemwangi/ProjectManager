@@ -66,68 +66,74 @@ const SingleTodo = ({ index, todo, todos, setTodos }: props) => {
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          {edit ? (
-            <>
-              <input
-                type="text"
-                value={editTodo}
-                ref={editInput}
-                onChange={(e) => setEditTodo(e.target.value)}
-                className="todos_single_text"
-              />
-            </>
-          ) : todo.isDone ? (
-            <s className="todos_single_text">{todo.todo}</s>
-          ) : (
-            <span className="todos_single_text">{todo.todo}</span>
-          )}
+          <div style={{ textAlign: "right", marginBottom: "6px" , color:"#076f6b"}}>
+            <small>created on: {todo.createdAt}</small>
+          </div>
 
-          <div>
-            <Tooltip title="Edit task title">
+          <div className="todo_content">
+            {edit ? (
+              <>
+                <input
+                  type="text"
+                  value={editTodo}
+                  ref={editInput}
+                  onChange={(e) => setEditTodo(e.target.value)}
+                  className="todos_single_text"
+                />
+              </>
+            ) : todo.isDone ? (
+              <s className="todos_single_text">{todo.todo}</s>
+            ) : (
+              <span className="todos_single_text">{todo.todo}</span>
+            )}
+
+            <div>
+              <Tooltip title="Edit task title">
+                <span
+                  className="icon"
+                  onClick={() => {
+                    if (!edit && !todo.isDone) {
+                      setEdit(!edit);
+                    }
+                  }}
+                >
+                  {!todo.isDone ? <AiFillEdit /> : <></>}
+                </span>
+              </Tooltip>
+
               <span
                 className="icon"
                 onClick={() => {
-                  if (!edit && !todo.isDone) {
-                    setEdit(!edit);
-                  }
+                  handleOngoing(todo.id);
                 }}
               >
-                {!todo.isDone ? <AiFillEdit /> : <></>}
+                {todo.isStarted ? (
+                  <Tooltip title="Set task backlog">
+                    <span>
+                      <FaTasks />
+                    </span>
+                  </Tooltip>
+                ) : (
+                  <Tooltip title="Start this task">
+                    <span>
+                      <MdAddTask />
+                    </span>
+                  </Tooltip>
+                )}
               </span>
-            </Tooltip>
 
-            <span
-              className="icon"
-              onClick={() => {
-                handleOngoing(todo.id);
-              }}
-            >
-              {todo.isStarted ? (
-                <Tooltip title="Set task backlog">
-                  <span>
-                    <FaTasks />
-                  </span>
-                </Tooltip>
-              ) : (
-                <Tooltip title="Start this task">
-                  <span>
-                    <MdAddTask />
-                  </span>
-                </Tooltip>
-              )}
-            </span>
+              <Tooltip title="delete Task">
+                <span className="icon" onClick={() => handleDelete(todo.id)}>
+                  <AiFillDelete />
+                </span>
+              </Tooltip>
 
-            <Tooltip title="delete Task">
-              <span className="icon" onClick={() => handleDelete(todo.id)}>
-                <AiFillDelete />
-              </span>
-            </Tooltip>
-
-            <Tooltip title="set as completed">
-              <span className="icon" onClick={() => handleDone(todo.id)}>
-                <MdDone />
-              </span>
-            </Tooltip>
+              <Tooltip title="set as completed">
+                <span className="icon" onClick={() => handleDone(todo.id)}>
+                  <MdDone />
+                </span>
+              </Tooltip>
+            </div>
           </div>
         </form>
       )}
