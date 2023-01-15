@@ -54,7 +54,7 @@ if (todo){
         ongoing.splice(source.index, 1)
         
         break;
-        case "todo_Remove" :
+        case "todosRemove" :
         add = complete[source.index]
         complete.splice((source.index,1))
         break;
@@ -67,7 +67,7 @@ if (todo){
       ongoing.splice(destination.index, 0,{...add, isDone:false, isStarted:true})
       
     }
-    if (destination.droppableId === "todo_Remove") {
+    if (destination.droppableId === "todosRemove") {
       complete.splice(destination.index, 0,{...add,isDone:true, isStarted:false})
       
     }

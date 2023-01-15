@@ -75,7 +75,7 @@ const TodoList: React.FC<props> = ({
         )}
       </Droppable>
 
-      <Droppable droppableId="todo_Remove">
+      <Droppable droppableId="todosRemove">
         {(provided) => (
           <div
             className="todos_complete todos_block"
