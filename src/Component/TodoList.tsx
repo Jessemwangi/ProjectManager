@@ -97,15 +97,7 @@ const TodoList: React.FC<props> = ({
         )}
       </Droppable>
     </div>
-    //     <div className='todos'>
 
-    //              {todoList.map(todo_ =>
-    //         <SingleTodo todo={todo_}
-    //         key={todo_.id} todos={todoList}
-    //         setTodos={setTodos} />
-
-    //   )}
-    //     </div>
   );
 };
 
