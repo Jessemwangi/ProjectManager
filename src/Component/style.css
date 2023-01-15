@@ -129,6 +129,7 @@ font-size: 30px;
 .dragged_backlog{
 opacity: 0.8;
 transform: scale(1);
+background-color: black;
 }
 .dragged_ongoing{
 

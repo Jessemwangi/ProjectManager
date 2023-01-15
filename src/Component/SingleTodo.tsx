@@ -89,8 +89,11 @@ const SingleTodo = ({ index, todo, todos, setTodos }: props) => {
               setEdit(!edit);
             }
           }}
-        >
-          <AiFillEdit />
+              >
+                {
+                  edit ? (<AiFillEdit />):(<></>)
+        }
+          
         </span>
 
         <span
