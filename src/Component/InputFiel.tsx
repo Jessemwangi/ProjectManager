@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import './style.css';
+import { Tooltip } from '@mui/material';
 
 interface props{
     todo:string;
@@ -17,8 +18,10 @@ const InputFiel:React.FC<props> = ({todo,setTodo,handleAdd}) => {
                 <input type="text" name="" id="" className='input_box' 
                 placeholder='enter a task' value={todo} 
                 onChange={(e)=>setTodo(e.target.value)}
-                ref={inputRef}/>
+                ref={inputRef} />
+            <Tooltip title="Add task">
                 <button className="input_submit" type='submit' >+</button>
+             </Tooltip>
             </form>
        
     );

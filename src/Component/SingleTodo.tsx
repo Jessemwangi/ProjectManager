@@ -4,6 +4,7 @@ import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { MdAddTask, MdDone } from "react-icons/md";
 import { FaTasks } from "react-icons/fa";
 import { Draggable } from "react-beautiful-dnd";
+import Tooltip from "@mui/material/Tooltip";
 
 type props = {
   todo: Todo;
@@ -34,7 +35,9 @@ const SingleTodo = ({ index, todo, todos, setTodos }: props) => {
   const handleOngoing = (id: number) => {
     setTodos(
       todos.map((todo) =>
-        todo.id === id ? { ...todo, isStarted: !todo.isStarted,isDone:false } : todo
+        todo.id === id
+          ? { ...todo, isStarted: !todo.isStarted, isDone: false }
+          : todo
       )
     );
   };
@@ -42,11 +45,10 @@ const SingleTodo = ({ index, todo, todos, setTodos }: props) => {
   const handleEdit = (e: React.FormEvent, id: number) => {
     e.preventDefault();
     setTodos(
-    
       todos.map((todo) => (todo.id === id ? { ...todo, todo: editTodo } : todo))
-  )
-    
-    console.log(todos)
+    );
+
+    console.log(todos);
     setEdit(false);
   };
 
@@ -56,63 +58,78 @@ const SingleTodo = ({ index, todo, todos, setTodos }: props) => {
 
   return (
     <Draggable draggableId={todo.id.toString()} index={index}>
-      {
-        (provided) => (
-    <form
-      className="todos_single_form"
+      {(provided, snapshot) => (
+        <form
+          className={`todos_single_form ${snapshot.isDragging ? "drag" : ""}`}
           onSubmit={(e) => handleEdit(e, todo.id)}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
-    >
-      {edit ? (
-        <>
-          <input
-            type="text"
-            value={editTodo}
-            ref={editInput}
-            onChange={(e) => setEditTodo(e.target.value)}
-            className="todos_single_text"
-          />
-        </>
-      ) : todo.isDone ? (
-        <s className="todos_single_text">{todo.todo}</s>
-      ) : (
-        <span className="todos_single_text">{todo.todo}</span>
-      )}
-
-      <div>
-        <span
-          className="icon"
-          onClick={() => {
-            if (!edit && !todo.isDone) {
-              setEdit(!edit);
-            }
-          }}
-              >
-                {
-                  edit ? (<AiFillEdit />):(<></>)
-        }
-          
-        </span>
-
-        <span
-          className="icon"
-          onClick={() => {
-            handleOngoing(todo.id);
-          }}
         >
-          {todo.isStarted ? <FaTasks /> : <MdAddTask />}
-        </span>
+          {edit ? (
+            <>
+              <input
+                type="text"
+                value={editTodo}
+                ref={editInput}
+                onChange={(e) => setEditTodo(e.target.value)}
+                className="todos_single_text"
+              />
+            </>
+          ) : todo.isDone ? (
+            <s className="todos_single_text">{todo.todo}</s>
+          ) : (
+            <span className="todos_single_text">{todo.todo}</span>
+          )}
 
-        <span className="icon" onClick={() => handleDelete(todo.id)}>
-          <AiFillDelete />
-        </span>
-        <span className="icon" onClick={() => handleDone(todo.id)}>
-          <MdDone />
-        </span>
-      </div>
-    </form>
+          <div>
+            <Tooltip title="Edit task title">
+              <span
+                className="icon"
+                onClick={() => {
+                  if (!edit && !todo.isDone) {
+                    setEdit(!edit);
+                  }
+                }}
+              >
+                {!todo.isDone ? <AiFillEdit /> : <></>}
+              </span>
+            </Tooltip>
+
+            <span
+              className="icon"
+              onClick={() => {
+                handleOngoing(todo.id);
+              }}
+            >
+              {todo.isStarted ? (
+                <Tooltip title="Set task backlog">
+                  <span>
+                    <FaTasks />
+                  </span>
+                </Tooltip>
+              ) : (
+                <Tooltip title="Start this task">
+                  <span>
+                    <MdAddTask />
+                  </span>
+                </Tooltip>
+              )}
+            </span>
+
+            <Tooltip title="delete Task">
+              <span className="icon" onClick={() => handleDelete(todo.id)}>
+                <AiFillDelete />
+              </span>
+            </Tooltip>
+
+            <Tooltip title="set as completed">
+              <span className="icon" onClick={() => handleDone(todo.id)}>
+                <MdDone />
+              </span>
+            </Tooltip>
+          </div>
+        </form>
       )}
     </Draggable>
   );
