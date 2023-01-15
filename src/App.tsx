@@ -56,7 +56,7 @@ if (todo){
         break;
         case "todosRemove" :
         add = complete[source.index]
-        complete.splice((source.index,1))
+        complete.splice(source.index, 1)
         break;
     }
     if (destination.droppableId === "todosbacklog") {
