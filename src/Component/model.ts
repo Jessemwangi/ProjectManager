@@ -3,5 +3,6 @@ export interface Todo{
     todo: string,
     isStarted:boolean,
     isDone: boolean,
-    createdAt:string,
+    createdAt: string,
+    deleted:boolean,
 }

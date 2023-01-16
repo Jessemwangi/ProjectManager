@@ -20,16 +20,16 @@ console.log(todo);
 const handleAdd = (e:React.FormEvent) =>{
 e.preventDefault();
 if (todo){
-  setTodos([...todos, { id: Date.now(), todo: todo, isDone: false, isStarted: false, createdAt: `${new Date().toLocaleDateString()}` }])
+  setTodos([...todos, { id: Date.now(), todo: todo, isDone: false, isStarted: false, createdAt: `${new Date().toLocaleDateString()}` , deleted:false}])
   setTodo('');
 }
 }
 
   
   useEffect(() => {
-    setComplitedTodos(todos.filter(todo => todo.isDone === true && todo.isStarted === false))
-    setOnGoingTodos(todos.filter(todo => todo.isStarted === true))
-    setBacklog(todos.filter(todos => todos.isDone === false && todos.isStarted === false))
+    setComplitedTodos(todos.filter(todo => todo.isDone === true && todo.isStarted === false &&  todo.deleted===false))
+    setOnGoingTodos(todos.filter(todo => todo.isStarted === true &&  todo.deleted===false))
+    setBacklog(todos.filter(todos => todos.isDone === false && todos.isStarted === false &&  todos.deleted===false))
   },[todos])
 
 

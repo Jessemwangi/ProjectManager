@@ -29,7 +29,8 @@ const SingleTodo = ({ index, todo, todos, setTodos }: props) => {
   };
 
   const handleDelete = (id: number) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+
+setTodos(todos.map((todo) => todo.id === id   ? { ...todo, deleted: true }: todo) );
   };
 
   const handleOngoing = (id: number) => {
@@ -57,7 +58,7 @@ const SingleTodo = ({ index, todo, todos, setTodos }: props) => {
   }, [edit]);
 
   return (
-    <Draggable draggableId={todo.id.toString()} index={index}>
+    <Draggable draggableId={todo.todo} index={index}>
       {(provided, snapshot) => (
         <form
           className={`todos_single_form ${snapshot.isDragging ? "drag" : ""}`}

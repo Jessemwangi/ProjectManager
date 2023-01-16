@@ -41,7 +41,7 @@ const TodoList: React.FC<props> = ({
                       {
                          backLog.map((todo_, index) => (
               <SingleTodo
-                index={index + 1} 
+                index={index} 
                 todo={todo_}
                 key={todo_.id}
                 todos={todoList}
@@ -63,7 +63,7 @@ const TodoList: React.FC<props> = ({
             <span className="todos_headings">Active Task</span>
             {onGoingTodos.map((todo_, index) => (
               <SingleTodo
-                index={index + 1}
+                index={index}
                 todo={todo_}
                 key={todo_.id}
                 todos={todoList}
@@ -85,7 +85,7 @@ const TodoList: React.FC<props> = ({
             <span className="todos_headings">Completed Task</span>
             {complitedTodos.map((todo_, index) => (
               <SingleTodo
-                index={index + 1}
+                index={index}
                 todo={todo_}
                 key={todo_.id}
                 todos={todoList}
