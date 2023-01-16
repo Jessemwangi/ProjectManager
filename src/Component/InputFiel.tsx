@@ -14,11 +14,14 @@ const InputFiel:React.FC<props> = ({todo,setTodo,handleAdd}) => {
     return (
         
             <form action="" className="input" 
-            onSubmit={(e)=>{handleAdd(e);inputRef.current?.blur(); inputRef.current?.focus()}}>
+            onSubmit={(e) => {
+                handleAdd(e); inputRef.current?.blur();
+                // inputRef.current?.focus()
+            }}>
                 <input type="text" name="" id="" className='input_box' 
                 placeholder='enter a task' value={todo} 
                 onChange={(e)=>setTodo(e.target.value)}
-                ref={inputRef} />
+                ref={inputRef}  />
             <Tooltip title="Add task">
                 <button className="input_submit" type='submit' >+</button>
              </Tooltip>

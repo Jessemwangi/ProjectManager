@@ -49,7 +49,7 @@ setTodos(todos.map((todo) => todo.id === id   ? { ...todo, deleted: true }: todo
       todos.map((todo) => (todo.id === id ? { ...todo, todo: editTodo } : todo))
     );
 
-    console.log(todos);
+    // console.log(todos);
     setEdit(false);
   };
 

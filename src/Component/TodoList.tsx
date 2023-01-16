@@ -27,7 +27,7 @@ const TodoList: React.FC<props> = ({
 
 
     
-  console.log(todoList);
+  // console.log(todoList);
   return (
     <div className="container">
       <Droppable droppableId="todosbacklog">
@@ -75,7 +75,7 @@ const TodoList: React.FC<props> = ({
         )}
       </Droppable>
 
-      <Droppable droppableId="todosRemove">
+      <Droppable droppableId="todosComplete">
         {(provided,snapshot) => (
           <div
             className={`todos_completed todos_block ${snapshot.isDraggingOver} ? 'dragged_completed': ''`} 
