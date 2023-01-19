@@ -10,27 +10,26 @@ import {DragDropContext, DropResult } from 'react-beautiful-dnd'
 const App:React.FC = ()=> {
 const  [todo,setTodo] = useState<string>("");
 // const  [todo,setTodo] = useState<string | number>("");
-  const [todos, setTodos] = useState<Todo[]>([])
+  // const [todos, setTodos] = useState<Todo[]>([])
   const [complitedTodos, setComplitedTodos] = useState<Todo[]>([])
   const [onGoingTodos, setOnGoingTodos] = useState<Todo[]>([])
   const[backLog,setBacklog] = useState<Todo[]>([])
-console.log(todo);
 
 
 const handleAdd = (e:React.FormEvent) =>{
 e.preventDefault();
 if (todo){
-  setTodos([...todos, { id: Date.now(), todo: todo, isDone: false, isStarted: false, createdAt: `${new Date().toLocaleDateString()}` , deleted:false}])
+  setBacklog([...backLog, { id: Date.now(), todo: todo, isDone: false, isStarted: false, createdAt: `${new Date().toLocaleDateString()}` , deleted:false}])
   setTodo('');
 }
 }
 
-  
-  useEffect(() => {
-    setComplitedTodos(todos.filter(todo => todo.isDone === true && todo.isStarted === false &&  todo.deleted===false))
-    setOnGoingTodos(todos.filter(todo => todo.isStarted === true &&  todo.deleted===false))
-    setBacklog(todos.filter(todos => todos.isDone === false && todos.isStarted === false &&  todos.deleted===false))
-  },[todos])
+useEffect(() => {
+  setComplitedTodos(complitedTodos)
+  setOnGoingTodos(onGoingTodos)
+  setBacklog(backLog)
+}, [backLog, complitedTodos, onGoingTodos, setBacklog, setComplitedTodos, setOnGoingTodos])
+
 
 
   const onDragEnd = (result: DropResult) => {
@@ -80,18 +79,17 @@ if (todo){
     setComplitedTodos(complete)
     console.log(result )
   }
-console.log(todos);
+// console.log(todos);
   return (
     <DragDropContext onDragEnd={onDragEnd}>
     <div className="App">
       <span className='heading'>Task Manager</span>
-      <InputFiel todo={todo} setTodo={setTodo} handleAdd={handleAdd}/>
-        <TodoList todoList={todos}
-          setTodos={setTodos}
+        <InputFiel todo={todo} setTodo={setTodo} handleAdd={handleAdd} />
+        
+        <TodoList 
           complitedTodos={complitedTodos} setComplitedTodos={setComplitedTodos}
           onGoingTodos={onGoingTodos} setOnGoingTodos={setOnGoingTodos}
-          backLog={backLog}
-          setBacklog={setBacklog}/>
+          backLog={backLog} setBacklog={setBacklog}/>
       {/* <Calculator/> */}
     </div>
     </DragDropContext>

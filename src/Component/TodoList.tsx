@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./style.css";
 import { Todo } from "./model";
 import SingleTodo from "./SingleTodo";
@@ -7,8 +7,8 @@ import { Droppable } from "react-beautiful-dnd";
 interface props {
     backLog: Todo[];
     setBacklog:React.Dispatch<React.SetStateAction<Todo[]>>;
-  todoList: Todo[];
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+  // todoList: Todo[];
+  // setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
   onGoingTodos: Todo[];
   setOnGoingTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
   complitedTodos: Todo[];
@@ -16,15 +16,18 @@ interface props {
 }
 
 const TodoList: React.FC<props> = ({
-  todoList,
-  setTodos,
-  complitedTodos,
+  setBacklog,backLog,
   onGoingTodos,
-    setOnGoingTodos,
+  setOnGoingTodos,
+  complitedTodos,
     setComplitedTodos,
-    setBacklog,backLog,
 }) => {
 
+  useEffect(() => {
+    setComplitedTodos(complitedTodos)
+    setOnGoingTodos(onGoingTodos)
+    setBacklog(backLog)
+  }, [backLog, complitedTodos, onGoingTodos, setBacklog, setComplitedTodos, setOnGoingTodos])
 
     
   // console.log(todoList);
@@ -44,8 +47,13 @@ const TodoList: React.FC<props> = ({
                 index={index} 
                 todo={todo_}
                 key={todo_.id}
-                todos={todoList}
-                setTodos={setTodos}
+                backLog={backLog}
+                             setBacklog={setBacklog}
+                             onGoingTodos={onGoingTodos}
+                             setOnGoingTodos={setOnGoingTodos}
+                             complitedTodos={complitedTodos}
+                             groupName={'backLogs'}
+                             setComplitedTodos={setComplitedTodos}
               />
                          )
                          )}
@@ -63,11 +71,16 @@ const TodoList: React.FC<props> = ({
             <span className="todos_headings">Active Task</span>
             {onGoingTodos.map((todo_, index) => (
               <SingleTodo
-                index={index}
-                todo={todo_}
-                key={todo_.id}
-                todos={todoList}
-                setTodos={setTodos}
+              index={index} 
+              todo={todo_}
+              key={todo_.id}
+              backLog={backLog}
+                           setBacklog={setBacklog}
+                           onGoingTodos={onGoingTodos}
+                           setOnGoingTodos={setOnGoingTodos}
+                complitedTodos={complitedTodos}
+                groupName={'onGoingTodos'}
+                setComplitedTodos={setComplitedTodos}
               />
             ))}
                         {provided.placeholder}
@@ -85,11 +98,16 @@ const TodoList: React.FC<props> = ({
             <span className="todos_headings">Completed Task</span>
             {complitedTodos.map((todo_, index) => (
               <SingleTodo
-                index={index}
-                todo={todo_}
-                key={todo_.id}
-                todos={todoList}
-                setTodos={setTodos}
+              index={index} 
+              todo={todo_}
+              key={todo_.id}
+              backLog={backLog}
+                           setBacklog={setBacklog}
+                           onGoingTodos={onGoingTodos}
+                           setOnGoingTodos={setOnGoingTodos}
+                complitedTodos={complitedTodos}
+                groupName={'complitedTodos'}
+                setComplitedTodos={setComplitedTodos}
               />
             ))}
                         {provided.placeholder}
