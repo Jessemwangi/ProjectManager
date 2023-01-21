@@ -1,0 +1,27 @@
+name: Validate Pproject Push
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      run: echo "Checking out code..."
+    - name: Run validation script
+      run: bash validate.sh
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      id: validation
+    - name: Echo validation status
+      run: |
+        if [ "${{ steps.validation.outputs.status }}" = "0" ]; then
+          echo "Validation successful!"
+        else
+          echo "Validation failed: ${{ steps.validation.outputs.reason }}"
+          exit 1
+      if: steps.validation.outputs.status != null
