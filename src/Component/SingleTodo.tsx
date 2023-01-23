@@ -9,132 +9,132 @@ import Tooltip from "@mui/material/Tooltip";
 type props = {
   todo: Todo;
   backLog: Todo[];
-  setBacklog: React.Dispatch<React.SetStateAction<Todo[]>>;
-  setOnGoingTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
-  onGoingTodos: Todo[];
+  // setBacklog: React.Dispatch<React.SetStateAction<Todo[]>>;
+  // setOnGoingTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+  // onGoingTodos: Todo[];
   index: number;
-  complitedTodos: Todo[];
-  setComplitedTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
-  groupName: string;
+  // complitedTodos: Todo[];
+  // setComplitedTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+  // groupName: string;
 };
 const SingleTodo = ({
   index,
   todo,
-  backLog,
-  setBacklog,
-  onGoingTodos,
-  setOnGoingTodos,
-  complitedTodos,
-  setComplitedTodos,
-  groupName,
+  // backLog,
+  // setBacklog,
+  // onGoingTodos,
+  // setOnGoingTodos,
+  // complitedTodos,
+  // setComplitedTodos,
+  // groupName,
 }: props) => {
   const [edit, setEdit] = useState<boolean>(false);
   const [editTodo, setEditTodo] = useState<string>(todo.todo);
 
   const editInput = useRef<HTMLInputElement>(null);
 
-  const handleDone = (todo: Todo) => {
-    console.log(todo);
-    if (!groupName) {
-      return;
-    } else {
-      if (groupName === "backlogs") {
-        backLog.splice(backLog.indexOf(todo), 1);
-      } else if (groupName === "onGoingTodos") {
-        onGoingTodos.splice(onGoingTodos.indexOf(todo), 1);
-      }
-      setComplitedTodos(
-        complitedTodos.splice(1, 0, { ...todo, isDone: true, isStarted: false })
-      );
-    }
-  };
+  // const handleDone = (todo: Todo) => {
+  //   console.log(todo);
+  //   if (!groupName) {
+  //     return;
+  //   } else {
+  //     if (groupName === "backlogs") {
+  //       backLog.splice(backLog.indexOf(todo), 1);
+  //     } else if (groupName === "onGoingTodos") {
+  //       onGoingTodos.splice(onGoingTodos.indexOf(todo), 1);
+  //     }
+  //     setComplitedTodos(
+  //       complitedTodos.splice(1, 0, { ...todo, isDone: true, isStarted: false })
+  //     );
+  //   }
+  // };
 
-  const handleDelete = (todo: Todo) => {
-    if (groupName === "backlogs") {
-      backLog.splice(backLog.indexOf(todo), 1);
-    } else if (groupName === "onGoingTodos") {
-      onGoingTodos.splice(onGoingTodos.indexOf(todo), 1);
-    } else {
-      complitedTodos.splice(complitedTodos.indexOf(todo), 1);
-    }
-  };
+  // const handleDelete = (todo: Todo) => {
+  //   if (groupName === "backlogs") {
+  //     backLog.splice(backLog.indexOf(todo), 1);
+  //   } else if (groupName === "onGoingTodos") {
+  //     onGoingTodos.splice(onGoingTodos.indexOf(todo), 1);
+  //   } else {
+  //     complitedTodos.splice(complitedTodos.indexOf(todo), 1);
+  //   }
+  // };
 
-  const handleOngoing = (id:number) => {
-    let index: number;
-    console.log(todo,'groupName,',groupName);
-    if (!groupName) {
-      return;
-    } else {
-      if (groupName === "backLogs") {
-        index = backLog.findIndex(element => element.id === id);
-        backLog.splice(index, 1);
-      } else if (groupName === "complitedTodos") {
-        index = complitedTodos.findIndex(element => element.id === id);
-        complitedTodos.splice(index, 1);
+  // const handleOngoing = (id:number) => {
+  //   let index: number;
+  //   console.log(todo,'groupName,',groupName);
+  //   if (!groupName) {
+  //     return;
+  //   } else {
+  //     if (groupName === "backLogs") {
+  //       index = backLog.findIndex(element => element.id === id);
+  //       backLog.splice(index, 1);
+  //     } else if (groupName === "complitedTodos") {
+  //       index = complitedTodos.findIndex(element => element.id === id);
+  //       complitedTodos.splice(index, 1);
 
-      }
+  //     }
 
   
-        onGoingTodos.splice(0, 0, { ...todo, isDone: false, isStarted: true })
+  //       onGoingTodos.splice(0, 0, { ...todo, isDone: false, isStarted: true })
     
-    }
+  //   }
 
-    console.log('backlogs', backLog)
-    console.log('onGoingTodos', onGoingTodos)
-    console.log('complitedTodos', complitedTodos);
-  };
+  //   console.log('backlogs', backLog)
+  //   console.log('onGoingTodos', onGoingTodos)
+  //   console.log('complitedTodos', complitedTodos);
+  // };
 
-  const handleEdit = (e: React.FormEvent, todo:Todo) => {
-    e.preventDefault();
+  // const handleEdit = (e: React.FormEvent, todo:Todo) => {
+  //   e.preventDefault();
 
-    if (!groupName) {
-      return;
-    } else {
-      if (groupName === "onGoingTodos") {
-        onGoingTodos.splice(onGoingTodos.indexOf(todo), 1);
-      } else if (groupName === "complitedTodos") {
-        complitedTodos.splice(complitedTodos.indexOf(todo), 1);
-      }
-      setComplitedTodos(
-        backLog.splice(1, 0, { ...todo, isDone: false, isStarted: false })
-      );
-    }
+  //   if (!groupName) {
+  //     return;
+  //   } else {
+  //     if (groupName === "onGoingTodos") {
+  //       onGoingTodos.splice(onGoingTodos.indexOf(todo), 1);
+  //     } else if (groupName === "complitedTodos") {
+  //       complitedTodos.splice(complitedTodos.indexOf(todo), 1);
+  //     }
+  //     setComplitedTodos(
+  //       backLog.splice(1, 0, { ...todo, isDone: false, isStarted: false })
+  //     );
+  //   }
 
-    setBacklog(
-      backLog.splice(backLog.indexOf(todo),0,{...todo,todo:editTodo})
+  //   setBacklog(
+  //     backLog.splice(backLog.indexOf(todo),0,{...todo,todo:editTodo})
       
-    );
+  //   );
 
-    // console.log(todos);
-    setEdit(false);
-  };
+  //   // console.log(todos);
+  //   setEdit(false);
+  // };
 
-  const handleBacktoBacklog = (todo: Todo) => {
-    if (!groupName) {
-      return;
-    } else {
-      if (groupName === "onGoingTodos") {
-        onGoingTodos.splice(onGoingTodos.indexOf(todo), 1);
-      } else if (groupName === "complitedTodos") {
-        complitedTodos.splice(complitedTodos.indexOf(todo), 1);
-      }
-      setBacklog(
-        backLog.splice(1, 0, { ...todo, isDone: false, isStarted: false })
-      );
-    }
+  // const handleBacktoBacklog = (todo: Todo) => {
+  //   if (!groupName) {
+  //     return;
+  //   } else {
+  //     if (groupName === "onGoingTodos") {
+  //       onGoingTodos.splice(onGoingTodos.indexOf(todo), 1);
+  //     } else if (groupName === "complitedTodos") {
+  //       complitedTodos.splice(complitedTodos.indexOf(todo), 1);
+  //     }
+  //     setBacklog(
+  //       backLog.splice(1, 0, { ...todo, isDone: false, isStarted: false })
+  //     );
+  //   }
 
-  };
+  // };
 
   useEffect(() => {
     editInput.current?.focus();
   }, [edit]);
 
 
-  useEffect(() => {
-    setComplitedTodos(complitedTodos)
-    setOnGoingTodos(onGoingTodos)
-    setBacklog(backLog)
-  }, [backLog, complitedTodos, onGoingTodos, setBacklog, setComplitedTodos, setOnGoingTodos]) 
+  // useEffect(() => {
+  //   setComplitedTodos(complitedTodos)
+  //   setOnGoingTodos(onGoingTodos)
+  //   setBacklog(backLog)
+  // }, [backLog, complitedTodos, onGoingTodos, setBacklog, setComplitedTodos, setOnGoingTodos]) 
   
   return (
     <Draggable draggableId={todo.todo} index={index}>

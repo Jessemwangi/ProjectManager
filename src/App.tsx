@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import InputFiel from './Component/InputFiel';
-import { Todo } from './Component/model';
+import { Progress, Todo } from './Component/model';
 import TodoList from './Component/TodoList';
 // import Calculator from './Component/Calculator';
 import {DragDropContext, DropResult } from 'react-beautiful-dnd'
@@ -9,18 +9,24 @@ import {DragDropContext, DropResult } from 'react-beautiful-dnd'
 
 const App:React.FC = ()=> {
 const  [todo,setTodo] = useState<string>("");
-// const  [todo,setTodo] = useState<string | number>("");
-  // const [todos, setTodos] = useState<Todo[]>([])
+ const [todos, setTodos] = useState<Todo[]>([])
   const [complitedTodos, setComplitedTodos] = useState<Todo[]>([])
   const [onGoingTodos, setOnGoingTodos] = useState<Todo[]>([])
   const[backLog,setBacklog] = useState<Todo[]>([])
 
 
 const handleAdd = (e:React.FormEvent) =>{
-e.preventDefault();
+  e.preventDefault();
+  
+  console.log(todo)
 if (todo){
-  setBacklog([...backLog, { id: Date.now(), todo: todo, isDone: false, isStarted: false, createdAt: `${new Date().toLocaleDateString()}` , deleted:false}])
-  setTodo('');
+  setTodos(
+    [...todos, {
+      progress: Progress.BACKLOG,
+      id: Date.now(), todo: todo,
+      isDone: false, isStarted: false, createdAt: `${new Date().toLocaleDateString()}`, deleted: false
+    }])
+  setTodo("");
 }
 }
 
@@ -87,10 +93,9 @@ useEffect(() => {
         <InputFiel todo={todo} setTodo={setTodo} handleAdd={handleAdd} />
         
         <TodoList 
-          complitedTodos={complitedTodos} setComplitedTodos={setComplitedTodos}
-          onGoingTodos={onGoingTodos} setOnGoingTodos={setOnGoingTodos}
-          backLog={backLog} setBacklog={setBacklog}/>
-      {/* <Calculator/> */}
+          todos={todos}
+        />
+      
     </div>
     </DragDropContext>
   );
