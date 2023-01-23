@@ -6,28 +6,23 @@ import { FaTasks } from "react-icons/fa";
 import { Draggable } from "react-beautiful-dnd";
 import Tooltip from "@mui/material/Tooltip";
 
-type props = {
-  todo: Todo;
-  backLog: Todo[];
-  // setBacklog: React.Dispatch<React.SetStateAction<Todo[]>>;
-  // setOnGoingTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
-  // onGoingTodos: Todo[];
-  index: number;
-  // complitedTodos: Todo[];
-  // setComplitedTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
-  // groupName: string;
-};
+interface TodoListProps {
+  todos: Todo[],
+  handleClick: (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    id: number
+  ) => void,
+  index: number,
+  key: string | number,
+  todo:Todo
+}
+
 const SingleTodo = ({
   index,
   todo,
-  // backLog,
-  // setBacklog,
-  // onGoingTodos,
-  // setOnGoingTodos,
-  // complitedTodos,
-  // setComplitedTodos,
-  // groupName,
-}: props) => {
+  handleClick,
+  key,
+}: TodoListProps) => {
   const [edit, setEdit] = useState<boolean>(false);
   const [editTodo, setEditTodo] = useState<string>(todo.todo);
 
@@ -84,30 +79,18 @@ const SingleTodo = ({
   //   console.log('complitedTodos', complitedTodos);
   // };
 
-  // const handleEdit = (e: React.FormEvent, todo:Todo) => {
-  //   e.preventDefault();
+  const handleEdit = (e: React.FormEvent, todo:Todo) => {
+    e.preventDefault();
 
-  //   if (!groupName) {
-  //     return;
-  //   } else {
-  //     if (groupName === "onGoingTodos") {
-  //       onGoingTodos.splice(onGoingTodos.indexOf(todo), 1);
-  //     } else if (groupName === "complitedTodos") {
-  //       complitedTodos.splice(complitedTodos.indexOf(todo), 1);
-  //     }
-  //     setComplitedTodos(
-  //       backLog.splice(1, 0, { ...todo, isDone: false, isStarted: false })
-  //     );
-  //   }
 
-  //   setBacklog(
-  //     backLog.splice(backLog.indexOf(todo),0,{...todo,todo:editTodo})
+    setTodos(
+      setTodos.splice(setTodos.indexOf(todo),0,{...todo,todo:editTodo})
       
-  //   );
+    );
 
-  //   // console.log(todos);
-  //   setEdit(false);
-  // };
+    // console.log(todos);
+    setEdit(false);
+  };
 
   // const handleBacktoBacklog = (todo: Todo) => {
   //   if (!groupName) {
